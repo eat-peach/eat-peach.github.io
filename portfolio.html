@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daoyi Zhang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --paper:    #f7f3ed;
+  --cream:    #faf7f2;
+  --sand:     #e8e0d4;
+  --dust:     #c9b99a;
+  --sage:     #8a9e8c;
+  --sage-dk:  #5a7060;
+  --ink:      #2a2825;
+  --ink-mid:  #5a5650;
+  --ink-soft: #9a9590;
+  --warm-rule:#ddd5c8;
+  --accent:   #8a6e52;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(247,243,237,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid var(--warm-rule);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 56px 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 30%, rgba(138,158,140,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 70%, rgba(201,185,154,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 10vw, 120px);
+  font-weight: 300;
+  line-height: 0.92;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.35s forwards;
+}
+.hero-name em {
+  font-style: italic;
+  color: var(--accent);
+}
+.hero-desc {
+  max-width: 480px;
+  font-size: 15px;
+  color: var(--ink-mid);
+  line-height: 1.75;
+  font-weight: 300;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.5s forwards;
+}
+.hero-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+  opacity: 0;
+  animation: fadeUp 0.9s 0.65s forwards;
+}
+.tag {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 5px 14px;
+  border: 0.5px solid var(--warm-rule);
+  border-radius: 20px;
+  color: var(--ink-soft);
+  background: rgba(255,255,255,0.5);
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 40px; right: 56px;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  writing-mode: vertical-rl;
+  opacity: 0;
+  animation: fadeIn 1s 1s forwards;
+}
+.hero-line {
+  position: absolute;
+  right: 56px;
+  bottom: 80px;
+  width: 0.5px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--warm-rule));
+  opacity: 0;
+  animation: fadeIn 1s 1.2s forwards;
+}
+
+/* ── SECTIONS ── */
+section {
+  padding: 100px 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 60px;
+}
+.section-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--dust);
+  font-style: italic;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+.section-rule {
+  flex: 1;
+  height: 0.5px;
+  background: var(--warm-rule);
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+.about-intro {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.about-intro em {
+  font-style: italic;
+  color: var(--accent);
+}
+.about-body {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.about-body p + p { margin-top: 16px; }
+.about-langs {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.lang-pill {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 4px 12px;
+  background: var(--sand);
+  border-radius: 20px;
+  color: var(--ink-mid);
+}
+
+/* ── EXPERIENCE ── */
+#experience { background: var(--cream); max-width: 100%; padding: 100px 0; }
+#experience > .inner { max-width: 1200px; margin: 0 auto; padding: 0 56px; }
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.exp-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0 48px;
+  padding: 32px 0;
+  border-bottom: 0.5px solid var(--warm-rule);
+  position: relative;
+}
+.exp-item:first-child { border-top: 0.5px solid var(--warm-rule); }
+.exp-year {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--dust);
+  padding-top: 3px;
+}
+.exp-co {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.exp-desc {
+  font-size: 13.5px;
+  color: var(--ink-mid);
+  font-weight: 300;
+  line-height: 1.7;
+}
+.exp-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border: 0.5px solid var(--warm-rule);
+  border-radius: 20px;
+  color: var(--ink-soft);
+}
+
+/* ── PROJECTS ── */
+.proj-block {
+  margin-bottom: 100px;
+}
+.proj-block:last-child { margin-bottom: 0; }
+.proj-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.proj-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--dust);
+}
+.proj-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: var(--ink);
+}
+.proj-stack {
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+.proj-desc {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 1.8;
+  font-weight: 300;
+  max-width: 600px;
+  margin-bottom: 32px;
+}
+.proj-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sage-dk);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--sage);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: 36px;
+}
+.proj-link:hover { color: var(--ink); border-color: var(--ink); }
+
+/* Tableau: 2-col screenshots */
+.tab-screenshots {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.tab-screenshots img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 0.5px solid var(--warm-rule);
+  border-radius: 6px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tab-screenshots img:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+}
+
+/* App: phone mockup strip */
+.app-strip {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+.phone-frame {
+  flex: 1;
+  background: var(--sand);
+  border-radius: 24px;
+  padding: 12px;
+  transition: transform 0.35s ease;
+}
+.phone-frame:hover { transform: translateY(-6px); }
+.phone-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 0.5px solid var(--warm-rule);
+  padding: 40px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--ink-soft);
+}
+.footer-links {
+  display: flex;
+  gap: 28px;
+}
+.footer-links a {
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--ink); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ── EMBEDS ── */
+.embed-container {
+  width: 100%;
+  margin-top: 12px;
+}
+.tableau-embed {
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.tableau-embed iframe {
+  width: 100%;
+  height: 1050px;
+  border: 0.5px solid var(--warm-rule);
+  border-radius: 8px;
+  display: block;
+}
+.embed-placeholder {
+  background: var(--sand);
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.embed-placeholder code {
+  font-family: monospace;
+  font-size: 11px;
+  background: rgba(0,0,0,0.06);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+/* Phone device frame for App */
+.app-embed {
+  display: flex;
+  justify-content: center;
+}
+.device-frame {
+  position: relative;
+  width: 375px;
+  background: #1a1a1a;
+  border-radius: 44px;
+  padding: 14px 10px;
+  box-shadow: 0 0 0 2px #333, 0 24px 60px rgba(0,0,0,0.18);
+}
+.device-frame::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  z-index: 2;
+}
+.device-frame iframe {
+  width: 100%;
+  height: 700px;
+  border: none;
+  border-radius: 34px;
+  display: block;
+  background: white;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { gap: 20px; }
+  #hero, section { padding-left: 24px; padding-right: 24px; }
+  #experience > .inner { padding: 0 24px; }
+  footer { padding: 32px 24px; flex-direction: column; gap: 20px; text-align: center; }
+  .hero-name { font-size: 52px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .exp-item { grid-template-columns: 1fr; gap: 4px; }
+  .app-strip { flex-direction: column; }
+  .phone-frame { max-width: 200px; }
+  .tab-screenshots { grid-template-columns: 1fr; }
+  .hero-scroll, .hero-line { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">D Z</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <p class="hero-eyebrow">Portfolio</p>
+  <h1 class="hero-name">Daoyi<br><em>Zhang</em></h1>
+  <p class="hero-desc">Sales operations professional with a genuine interest in business analytics. I use data to support decisions, build tools to improve execution, and stay curious about what technology can do for the way teams work.</p>
+  <div class="hero-tags">
+    <span class="tag">Sales Operations</span>
+    <span class="tag">Business Analytics</span>
+    <span class="tag">Process & Execution</span>
+    <span class="tag">Trilingual</span>
+  </div>
+  <div class="hero-line"></div>
+  <span class="hero-scroll">Scroll</span>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-intro reveal">
+      Background in <em>sales operations</em> with a strong interest in business analytics. Data is most useful when it connects directly to operational decisions, and that's the space I'm drawn to.
+    </div>
+    <div class="about-body reveal">
+      <p>I have worked in B2B sales operations, covering account management, promotional execution, CRM data management, and cross-team coordination. Building dashboards and automating reports was a natural extension of that work: it made things more visible and easier to act on.</p>
+      <p>Outside of work I build side projects: a structured wine blind tasting app, browser automation scripts, and data visualisation work. I am genuinely curious about how AI is changing operational workflows and I actively look for ways to apply it, not just follow it from a distance.</p>
+      <div class="about-langs">
+        <span class="lang-pill">English Fluent</span>
+        <span class="lang-pill">Mandarin Native</span>
+        <span class="lang-pill">Cantonese Native</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="inner">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-year">2024 – Present</div>
+        <div>
+          <div class="exp-co">Dan Murphy's</div>
+          <div class="exp-desc">Retail sales and customer-facing operations. Involved in in-store tasting events, targeted email marketing, and contributing to product ranging decisions.</div>
+          <span class="exp-tag">Melbourne</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-year">2022 – 2023</div>
+        <div>
+          <div class="exp-co">Treasury Wine Estates</div>
+          <div class="exp-desc">Sales operations in a B2B setting account tiering, promotional policy execution, logistics coordination, and reporting. Built Power BI dashboards to support planning and tracking across the team.</div>
+          <span class="exp-tag">Melbourne</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-year">2021 – 2022</div>
+        <div>
+          <div class="exp-co">Publicis Groupe</div>
+          <div class="exp-desc">Marketing data internship data collection, cleaning, and building automated Excel reports to speed up delivery for the team.</div>
+          <span class="exp-tag">Guangzhou</span>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-year">2019</div>
+        <div>
+          <div class="exp-co">The Wine Magazine</div>
+          <div class="exp-desc">Editorial internship. Content production, interview coordination, and event logistics.</div>
+          <span class="exp-tag">Guangzhou</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- Tableau -->
+  <div class="proj-block reveal">
+    <div class="proj-meta">
+      <span class="proj-num">01</span>
+      <h3 class="proj-name">Supply Chain Operations Dashboard</h3>
+    </div>
+    <p class="proj-stack">Tableau &nbsp;·&nbsp; LOD Calculations &nbsp;·&nbsp; DataCo Global 2015–2017</p>
+    <p class="proj-desc">A sales operations dashboard built on 180,000 real supply chain orders. Surfaces category profitability structure, fulfilment risk, and shipping mode efficiency the kind of view a channel ops team would actually use to make resource decisions.</p>
+    <a class="proj-link" href="https://public.tableau.com/app/profile/daoyi.zhang" target="_blank">
+      View on Tableau Public &rarr;
+    </a>
+    <div class="embed-container tableau-embed">
+      <iframe
+        src="https://public.tableau.com/views/SupplyChainOperationsAnalysisDataCoGlobal20152017/SupplyChainOperationsAnalysis?:embed=yes&:showVizHome=no&:tabs=no&:toolbar=yes&:device=desktop&:render=true"
+        width="100%" height="1050"
+        frameborder="0"
+        allowfullscreen
+        title="Supply Chain Operations Dashboard">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- Blind Tasting App -->
+  <div class="proj-block reveal">
+    <div class="proj-meta">
+      <span class="proj-num">02</span>
+      <h3 class="proj-name">Wine Blind Tasting App</h3>
+    </div>
+    <p class="proj-stack">React &nbsp;·&nbsp; TypeScript &nbsp;·&nbsp; Vite &nbsp;·&nbsp; PWA &nbsp;·&nbsp; Tailwind CSS &nbsp;·&nbsp; Multi-model AI</p>
+    <p class="proj-desc">A mobile-first web app for structured blind tasting. Walks through an 8-step evaluation flow, stores notes locally, and lets you compare your predictions against the reveal. Hooked up to four AI models (Gemini, OpenAI, Anthropic, DeepSeek) for automatic grape variety and region inference no backend needed, API keys stay on device.</p>
+    <a class="proj-link" href="https://blind-tasting.app" target="_blank">
+      Open App &rarr;
+    </a>
+    <div class="embed-container app-embed">
+      <div class="device-frame">
+        <iframe
+          src="https://wine-blind-tasting-app-main.vercel.app/"
+          title="Wine Blind Tasting App"
+          frameborder="0"
+          allow="fullscreen"
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Daoyi Zhang</span>
+  <div class="footer-links">
+    <a href="https://github.com/eat-peach" target="_blank">GitHub</a>
+    
+    <a href="mailto:daoyi.zhang@outlook.com">Email</a>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
