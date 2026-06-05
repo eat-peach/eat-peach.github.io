@@ -6,7 +6,6 @@
 <title>Daoyi Zhang</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
-<script type="module" src="https://public.tableau.com/javascripts/api/tableau.embedding.3.latest.min.js"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -196,7 +195,7 @@ nav {
 
 /* ── SECTIONS ── */
 section {
-  padding: 90px 56px;
+  padding: 56px 56px;
   max-width: 1180px;
   margin: 0 auto;
 }
@@ -259,6 +258,36 @@ section {
   margin-top: 28px;
   flex-wrap: wrap;
 }
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.edu-card {
+  padding: 28px 30px;
+  background: var(--cream);
+  border: 0.5px solid var(--warm-rule);
+  border-radius: 10px;
+}
+.edu-school {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.edu-degree {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.edu-note {
+  font-size: 13.5px;
+  color: var(--ink-mid);
+  font-weight: 300;
+  line-height: 1.75;
+}
+.edu-note [data-lang="zh"] { line-height: 1.9; }
 .lang-pill {
   font-size: 11px;
   letter-spacing: 0.05em;
@@ -269,12 +298,12 @@ section {
 }
 
 /* ── EXPERIENCE ── */
-#experience { background: var(--cream); max-width: 100%; padding: 90px 0; }
+#experience { background: var(--cream); max-width: 100%; padding: 56px 0; }
 #experience > .inner { max-width: 1180px; margin: 0 auto; padding: 0 56px; }
 .exp-list { display: flex; flex-direction: column; }
 .exp-item {
   display: grid;
-  grid-template-columns: 150px 56px 1fr;
+  grid-template-columns: 150px 1fr;
   gap: 0 32px;
   padding: 28px 0;
   border-bottom: 0.5px solid var(--warm-rule);
@@ -286,20 +315,25 @@ section {
   font-size: 13px;
   font-style: italic;
   color: var(--dust);
-  padding-top: 5px;
+  padding-top: 4px;
 }
 .exp-logo {
-  width: 48px; height: 48px;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 0.5px solid var(--warm-rule);
+  height: 26px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
+  letter-spacing: 0.04em;
   color: var(--sage-dk);
+}
+.exp-logo img {
+  height: 26px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  display: block;
 }
 .exp-co {
   font-weight: 500;
@@ -380,13 +414,13 @@ section {
 }
 .proj-link:hover { color: var(--ink); border-color: var(--ink); }
 
-.tableau-embed { width: 100%; margin-top: 4px; }
-.tableau-embed tableau-viz {
+.tableau-embed { width: 100%; max-width: 1005px; margin: 4px auto 0; }
+.tableau-embed iframe {
   width: 100%;
-  display: block;
+  height: 835px;
   border: 0.5px solid var(--warm-rule);
   border-radius: 8px;
-  overflow: hidden;
+  display: block;
 }
 .app-embed { display: flex; justify-content: center; margin-top: 4px; }
 .device-frame {
@@ -459,18 +493,40 @@ footer {
   .nav-links { display: none; }
   #hero {
     grid-template-columns: 1fr;
-    padding: 90px 24px 50px;
-    gap: 36px;
+    padding: 96px 24px 50px;
+    gap: 32px;
     text-align: left;
   }
-  .hero-photo-wrap { order: -1; max-width: 320px; }
-  section { padding: 60px 24px; }
+  .hero-left { order: 2; }
+  .hero-photo-wrap { order: 1; max-width: 280px; }
+  .hero-name { font-size: clamp(48px, 14vw, 72px); }
+  .hero-desc { max-width: 100%; }
+  section { padding: 56px 24px; max-width: 100%; }
+  #experience { padding: 56px 0; }
   #experience > .inner { padding: 0 24px; }
   footer { padding: 32px 24px; flex-direction: column; gap: 20px; text-align: center; }
-  .about-grid { grid-template-columns: 1fr; gap: 36px; }
-  .exp-item { grid-template-columns: 48px 1fr; gap: 0 20px; }
-  .exp-year { grid-column: 2; font-size: 12px; padding-top: 0; margin-bottom: 4px; }
-  .exp-logo { grid-row: span 2; }
+  .section-title { font-size: 28px; }
+  .section-header { gap: 16px; margin-bottom: 36px; }
+  .about-grid { grid-template-columns: 1fr; gap: 28px; }
+  .about-intro { font-size: 19px; }
+  .edu-grid { grid-template-columns: 1fr; gap: 20px; }
+  .edu-card { padding: 22px 22px; }
+  .exp-item { grid-template-columns: 1fr; gap: 6px; padding: 24px 0; }
+  .exp-year { font-size: 12px; padding-top: 0; }
+  .exp-logo img { max-width: 160px; height: 22px; }
+  .proj-name { font-size: 24px; }
+  .tableau-embed { max-width: 100%; }
+  .tableau-embed iframe { height: 70vh; min-height: 480px; }
+  .device-frame { width: 100%; max-width: 340px; }
+  .device-frame iframe { height: 76vh; min-height: 560px; }
+  .proj-block { margin-bottom: 64px; }
+}
+@media (max-width: 460px) {
+  #hero { padding: 88px 20px 40px; }
+  section { padding: 48px 20px; }
+  #experience > .inner { padding: 0 20px; }
+  .hero-tags { gap: 7px; }
+  .tag { font-size: 10px; padding: 4px 11px; }
 }
 </style>
 </head>
@@ -482,6 +538,7 @@ footer {
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#about"><span data-lang="en">About</span><span data-lang="zh">关于</span></a></li>
+      <li><a href="#education"><span data-lang="en">Education</span><span data-lang="zh">教育</span></a></li>
       <li><a href="#experience"><span data-lang="en">Experience</span><span data-lang="zh">经历</span></a></li>
       <li><a href="#projects"><span data-lang="en">Projects</span><span data-lang="zh">作品</span></a></li>
     </ul>
@@ -518,6 +575,7 @@ footer {
 </section>
 
 <!-- ABOUT -->
+<!-- ABOUT -->
 <section id="about">
   <div class="section-header reveal">
     <span class="section-num">01</span>
@@ -547,11 +605,32 @@ footer {
   </div>
 </section>
 
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title"><span data-lang="en">Education</span><span data-lang="zh">教育背景</span></h2>
+    <div class="section-rule"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-school"><span data-lang="en">University of Adelaide</span><span data-lang="zh">阿德莱德大学</span></div>
+      <div class="edu-degree"><span data-lang="en">Master of Wine Business · QS Top 100 · 2021–2022</span><span data-lang="zh">葡萄酒商业硕士 · QS 世界百强 · 2021–2022</span></div>
+      <div class="edu-note"><span data-lang="en">A Group of Eight research university. The programme is essentially business management, marketing, and brand management applied to the wine sector, so the core frameworks (consumer behaviour, channel strategy, data analysis) carry directly into FMCG and retail operations.</span><span data-lang="zh">澳洲八大研究型名校之一。这个项目本质上是把商业管理、市场营销与品牌管理放在葡萄酒行业的场景下来学，因此其中的核心框架（消费者行为、渠道策略、数据分析）可以直接迁移到快消与零售运营中。</span></div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-school"><span data-lang="en">Shandong University · Sun Yat-sen University (exchange)</span><span data-lang="zh">山东大学 · 中山大学（交流）</span></div>
+      <div class="edu-degree"><span data-lang="en">Bachelor of Philosophy · Project 985 · 2016–2020</span><span data-lang="zh">哲学学士 · 985 工程 · 2016–2020</span></div>
+      <div class="edu-note"><span data-lang="en">Both are Project 985 universities, China's tier of leading national institutions. Philosophy trained the habits I rely on most: breaking problems down, reasoning through ambiguity, and forming a clear independent view.</span><span data-lang="zh">两所都是 985 工程院校，属于中国顶尖高校之列。哲学训练出了我最依赖的几个习惯：拆解问题、在模糊中推理、并形成清晰而独立的判断。</span></div>
+    </div>
+  </div>
+</section>
+
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="inner">
     <div class="section-header reveal">
-      <span class="section-num">02</span>
+      <span class="section-num">03</span>
       <h2 class="section-title"><span data-lang="en">Experience</span><span data-lang="zh">工作经历</span></h2>
       <div class="section-rule"></div>
     </div>
@@ -559,9 +638,8 @@ footer {
 
       <div class="exp-item reveal">
         <div class="exp-year">2024 – Present</div>
-        <div class="exp-logo">DM</div>
         <div>
-          <div class="exp-co">Dan Murphy's</div>
+          <div class="exp-logo"><img src="https://www.danmurphys.com.au/assets/images/brands/dans-header-banner-1.svg" alt="Dan Murphy's" onerror="this.parentElement.innerHTML='<span class=\u0022exp-co\u0022>Dan Murphy\u2019s</span>'"></div>
           <div class="exp-desc">
             <span data-lang="en">Retail sales and customer-facing operations. Involved in in-store tasting events, targeted email marketing, and contributing to product ranging decisions.</span>
             <span data-lang="zh">零售销售与客户运营。参与门店品鉴活动、定向邮件营销，并参与产品选品决策。</span>
@@ -572,9 +650,8 @@ footer {
 
       <div class="exp-item reveal">
         <div class="exp-year">2022 – 2023</div>
-        <div class="exp-logo">TWE</div>
         <div>
-          <div class="exp-co">Treasury Wine Estates</div>
+          <div class="exp-logo"><img src="https://a.storyblok.com/f/171317/300x45/353576d592/twelogo2.svg" alt="Treasury Wine Estates" onerror="this.parentElement.innerHTML='<span class=\u0022exp-co\u0022>Treasury Wine Estates</span>'"></div>
           <div class="exp-desc">
             <span data-lang="en">Sales operations in a B2B setting account tiering, promotional policy execution, logistics coordination, and reporting. Built Power BI dashboards to support planning and tracking across the team.</span>
             <span data-lang="zh">B2B 销售运营，涉及客户分级、促销政策执行、物流协调和数据报表。搭建 Power BI 看板，支持团队的规划与追踪。</span>
@@ -585,7 +662,6 @@ footer {
 
       <div class="exp-item reveal">
         <div class="exp-year">2021 – 2022</div>
-        <div class="exp-logo">PG</div>
         <div>
           <div class="exp-co">Publicis Groupe</div>
           <div class="exp-desc">
@@ -598,7 +674,6 @@ footer {
 
       <div class="exp-item reveal">
         <div class="exp-year">2019</div>
-        <div class="exp-logo">WM</div>
         <div>
           <div class="exp-co">The Wine Magazine</div>
           <div class="exp-desc">
@@ -616,7 +691,7 @@ footer {
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-header reveal">
-    <span class="section-num">03</span>
+    <span class="section-num">04</span>
     <h2 class="section-title"><span data-lang="en">Projects</span><span data-lang="zh">作品</span></h2>
     <div class="section-rule"></div>
   </div>
@@ -635,20 +710,16 @@ footer {
       <span data-lang="en">View on Tableau Public &rarr;</span><span data-lang="zh">在 Tableau Public 查看 &rarr;</span>
     </a>
     <div class="tableau-embed">
-      <tableau-viz
-        src="https://public.tableau.com/views/SupplyChainRiskAnalysisDataCoGlobal20152017/SupplyChainRiskAnalysis"
-        toolbar="bottom"
-        hide-tabs
-        device="desktop">
-      </tableau-viz>
+      <iframe
+        src="https://public.tableau.com/views/SupplyChainRiskAnalysisDataCoGlobal20152017/SupplyChainRiskAnalysis?:embed=y&:showVizHome=no&:toolbar=yes&:tabs=no"
+        title="Supply Chain Risk Analysis">
+      </iframe>
     </div>
     <div class="tableau-embed" style="margin-top:24px;">
-      <tableau-viz
-        src="https://public.tableau.com/views/SupplyChainOperationsAnalysisDataCoGlobal20152017_17805652010870/GrowthQualityAnalysis"
-        toolbar="bottom"
-        hide-tabs
-        device="desktop">
-      </tableau-viz>
+      <iframe
+        src="https://public.tableau.com/views/SupplyChainOperationsAnalysisDataCoGlobal20152017_17805652010870/GrowthQualityAnalysis?:embed=y&:showVizHome=no&:toolbar=yes&:tabs=no"
+        title="Growth Quality Analysis">
+      </iframe>
     </div>
   </div>
 
